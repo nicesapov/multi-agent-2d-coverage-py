@@ -4,8 +4,8 @@ import numpy as np
 import math
 
 class Agent:
-    def __init__(self):
-        self.p = np.array([float(INITIAL_X), float(INITIAL_Y)])
+    def __init__(self, x, y):
+        self.p = np.array([float(x), float(y)])
 
         self.angle = 0
         self.e = np.array([1., 0.])
