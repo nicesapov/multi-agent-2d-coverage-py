@@ -24,12 +24,12 @@ def main():
         ax.set_xlim([X_MIN, X_MAX])
         ax.set_ylim([Y_MIN, Y_MAX])
 
-        x, y, field = scalar_field.get_field(t)
+        x, y, field, func = scalar_field.get_field(t)
         cs = ax.contour(x, y, field, levels = [6, 10, 14, 18])
         ax.clabel(cs)
 
-        agent.update(field)
-        plt.plot(agent.x, agent.y, marker='o')
+        agent.update(func, t)
+        plt.plot(agent.p[0], agent.p[1], marker='o')
 
         return cs
 

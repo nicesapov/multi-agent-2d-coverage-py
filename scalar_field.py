@@ -33,7 +33,7 @@ def moving_mountain(x, y, iteration):
         C_X_MIN, C_X_MAX
     ) * scale
 
-    return scale * H - min(scale * H, math.hypot(x-c_x, y*scale-c_y))
+    return scale * H - math.hypot(x-c_x, y*scale-c_y)
 
 def deforming(x, y, i):
     return np.linalg.norm(
@@ -48,9 +48,9 @@ def deforming(x, y, i):
 
 
 def get_field(t):
-    f = np.vectorize(moving_mountain)
-    #f = np.vectorize(deforming)
+    #f = np.vectorize(moving_mountain)
+    f = np.vectorize(deforming)
 
     x, y = np.mgrid[X_MIN:X_MAX, Y_MIN:Y_MAX]
 
-    return x, y, f(x, y, t)
+    return x, y, f(x, y, t), f
