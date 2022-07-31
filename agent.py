@@ -70,6 +70,8 @@ class Agent:
             if distance_to_closest < VISION and np.vdot(closest_agent.p - self.p, self.e) > 0:
                 self.v = min(self.vmax * distance_to_closest / VISION, closest_agent.v)
                 print(f'{self.color} goes after {closest_agent.color} and slows down to {self.v}')
+            else:
+                self.v = self.vmax
 
         self.track += [self.p]
         if (len(self.track) > MAX_TRACK):
