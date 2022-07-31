@@ -15,7 +15,7 @@ def main():
     fig, ax = plt.subplots()
 #    fig.set_figwidth(10)#X_MAX - X_MIN)
 #    fig.set_figheight(12)#Y_MAX - Y_MIN)
-    agents = [[Agent(x, y), c] for [x, y, c] in INITIAL_POSITIONS]
+    agents = [[Agent(x, y, a), c] for [x, y, c, a] in INITIAL_POSITIONS]
 
     def animate(t):
         nonlocal agents
@@ -46,7 +46,7 @@ def main():
     anime.save(
         'anime.gif', 
         writer='imagemick', 
-        fps=15,
+        fps=20,
         dpi=120,
     )
 
