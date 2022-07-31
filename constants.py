@@ -8,7 +8,7 @@ LEVELS = [12, 20, 28, 36]
 
 TARGET_ISOLINE = 20
 INITIAL_POSITIONS = [
-    [-60, 60, 'green'],
+    [45, 35, 'green'],
     [-20, 44, 'red'],
     [33, -4, 'blue'],
     [43, -47, 'yellow'],
@@ -16,5 +16,5 @@ INITIAL_POSITIONS = [
 ] 
 
 PERIOD = 2000 #ticks
-OVERALL_DURATION = 200
+OVERALL_DURATION = 1000
 #DISPLAY_FREQUENCY = 1000 #ms

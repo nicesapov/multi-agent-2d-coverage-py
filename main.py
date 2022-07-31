@@ -18,6 +18,7 @@ def main():
     agents = [[Agent(x, y), c] for [x, y, c] in INITIAL_POSITIONS]
 
     def animate(t):
+        nonlocal agents
         print(t)
         ax.clear()
 
@@ -28,7 +29,8 @@ def main():
         cs = ax.contour(x, y, field, levels = LEVELS)
         ax.clabel(cs)
 
-        [agent.update(func, t) for agent, c in agents]
+        updated = [[agent.updated(func, t, agents), c] for agent, c in agents]
+        agents = updated
         [plt.plot(agent.p[0], agent.p[1], marker='o', color=color) for agent, color in agents]
 
         return cs
