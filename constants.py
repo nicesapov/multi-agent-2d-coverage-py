@@ -23,7 +23,7 @@ INITIAL_POSITIONS_PRESET = [
 
 GENERATED_AGENTS_NUMBER = 25
 INITIAL_POSITIONS_GENERATED = [
-    [random.randint(X_MIN / 2, X_MAX / 2), random.randint(Y_MIN / 2, Y_MAX / 2), f'#{random.randint(0,9)}{random.randint(0,9)}{random.randint(0,9)}', random.randint(0, GENERATED_AGENTS_NUMBER)]
+    [random.randint(X_MIN / 2, X_MAX / 2), random.randint(Y_MIN / 2, Y_MAX / 2), [random.random(), random.random(), random.random()], random.randint(0, GENERATED_AGENTS_NUMBER)]
     for i in range(GENERATED_AGENTS_NUMBER)
 ]
 
@@ -33,5 +33,5 @@ MAX_TRACK = 10
 VISION = 20
 
 PERIOD = 2000 #ticks
-OVERALL_DURATION = 4000
+OVERALL_DURATION = 30
 #DISPLAY_FREQUENCY = 1000 #ms

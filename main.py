@@ -27,7 +27,7 @@ def main():
 
         x, y, field, func = scalar_field.get_field(t)
         cs = ax.contour(x, y, field, levels = LEVELS)
-        ax.clabel(cs)
+        ax.clabel(cs, fmt = '%.0f')
 
         updated = [agent.updated(func, t, agents) for agent in agents]
         agents = updated
