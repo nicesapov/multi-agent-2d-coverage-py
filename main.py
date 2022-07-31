@@ -15,7 +15,7 @@ def main():
     fig, ax = plt.subplots()
 #    fig.set_figwidth(10)#X_MAX - X_MIN)
 #    fig.set_figheight(12)#Y_MAX - Y_MIN)
-    agents = [[Agent(x, y, a), c] for [x, y, c, a] in INITIAL_POSITIONS]
+    agents = [Agent(x, y, c, a) for [x, y, c, a] in INITIAL_POSITIONS]
 
     def animate(t):
         nonlocal agents
@@ -29,9 +29,9 @@ def main():
         cs = ax.contour(x, y, field, levels = LEVELS)
         ax.clabel(cs)
 
-        updated = [[agent.updated(func, t, agents), c] for agent, c in agents]
+        updated = [agent.updated(func, t, agents) for agent in agents]
         agents = updated
-        [plt.plot(agent.p[0], agent.p[1], marker='o', color=color) for agent, color in agents]
+        [plt.plot(agent.p[0], agent.p[1], marker='o', color=agent.color) for agent in agents]
 
         return cs
 

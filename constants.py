@@ -1,3 +1,5 @@
+import random 
+
 H = 40
 X_MIN = -100
 X_MAX = 100
@@ -6,8 +8,8 @@ Y_MAX = 100
 
 LEVELS = [12, 20, 28, 36]
 
-TARGET_ISOLINE = 20
-INITIAL_POSITIONS = [
+TARGET_ISOLINE = 36
+INITIAL_POSITIONS_PRESET = [
     [45, 35, 'green', 1],
     [-20, 44, 'red', 2],
     [33, -4, 'blue', 3],
@@ -19,9 +21,17 @@ INITIAL_POSITIONS = [
     [-32, 47, 'cyan', 9],
 ] 
 
-MAX_TRACK = 10
-VISION = 10
+GENERATED_AGENTS_NUMBER = 25
+INITIAL_POSITIONS_GENERATED = [
+    [random.randint(X_MIN / 2, X_MAX / 2), random.randint(Y_MIN / 2, Y_MAX / 2), f'#{random.randint(0,9)}{random.randint(0,9)}{random.randint(0,9)}', random.randint(0, GENERATED_AGENTS_NUMBER)]
+    for i in range(GENERATED_AGENTS_NUMBER)
+]
 
-PERIOD = 2000 #ticks
-OVERALL_DURATION = 500
+INITIAL_POSITIONS = INITIAL_POSITIONS_GENERATED
+
+MAX_TRACK = 10
+VISION = 20
+
+PERIOD = 1000 #ticks
+OVERALL_DURATION = 1000
 #DISPLAY_FREQUENCY = 1000 #ms

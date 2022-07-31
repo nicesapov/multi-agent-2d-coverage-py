@@ -5,12 +5,13 @@ import math
 import copy
 
 class Agent:
-    def __init__(self, x, y, angle):
+    def __init__(self, x, y, color, angle):
         self.p = np.array([float(x), float(y)])
 
         self.angle = angle
         self.e = np.array([math.cos(self.angle), math.sin(self.angle)])
         self.vision = VISION
+        self.color = color
 
         #TODO convert meters per second to this custom scale
         self.vmax = 0.6 #distance per frame
@@ -28,7 +29,6 @@ class Agent:
         self = copy.deepcopy(old)
 
         if len(self.track) == MAX_TRACK:
-            assert old is old
             assert not self is old
             
             closest_agent = None
@@ -40,9 +40,24 @@ class Agent:
                 saw_latest = np.linalg.norm(agent.track[MAX_TRACK - 1] - self.track[MAX_TRACK - 1]) < VISION  
                 saw_oldest = np.linalg.norm(agent.track[0] - self.track[0]) < VISION  
 
-                return [saw_oldest and saw_latest, not saw_oldest and not saw_latest, max([np.linalg.norm(agent.track[i] - self.track[i])] for i in range(MAX_TRACK))]
+                return [
+                    np.vdot(agent.p - self.p, self.e) <= 0,
+                    not saw_oldest and not saw_latest, 
+                    saw_oldest and saw_latest, 
+                    max
+                    (
+                        [100] + 
+                        (
+                            [
+                                np.linalg.norm(agent.track[i] - self.track[i]) 
+                                for i in range(MAX_TRACK)
+                                if np.vdot(agent.p - self.p, self.e) > 0
+                            ]
+                        )
+                    )
+                ]
 
-            for agent, c in agents:
+            for agent in agents:
                 if agent is old:
                     continue
 
@@ -52,8 +67,9 @@ class Agent:
                     closest_projection = projection
 
             distance_to_closest = np.linalg.norm(closest_agent.p - self.p) 
-            if distance_to_closest < VISION:
-                self.v = self.vmax * distance_to_closest / VISION
+            if distance_to_closest < VISION and np.vdot(closest_agent.p - self.p, self.e) > 0:
+                self.v = min(self.vmax * distance_to_closest / VISION, closest_agent.v)
+                print(f'{self.color} goes after {closest_agent.color} and slows down to {self.v}')
 
         self.track += [self.p]
         if (len(self.track) > MAX_TRACK):
