@@ -46,7 +46,7 @@ def main():
     anime.save(
         'anime.gif', 
         writer='imagemick', 
-        fps=20,
+        fps=15,
         dpi=120,
     )
 
